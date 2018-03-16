@@ -20,4 +20,4 @@ The easiest way to get this project up and running is through Docker.
 
 Running docker-compose up in the root directory will set up a test server and client. Hit http://localhost:8080/message to see it in action.
 
-The above command starts up the server and client, with the client pulling configuration about what message to show from the server. For more information abotu this refer to the docs.
+The above command starts up the server and client, with the client pulling configuration about what message to show from the server. For more information about this refer to the docs.
