@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  run-tests:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
@@ -15,19 +15,20 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn integration-test -DskipDocker
-  test:
+  package:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - run: echo $DOCKER_MB_USER and $DOCKER_FAKE_PASS
+
       - run: docker login -u $DOCKER_MB_USER -p $DOCKER_MB_PASS
+      - run: mvn package -DskipTests
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - test:
+      - run-tests
+      - package:
           context: mblackford-docker
