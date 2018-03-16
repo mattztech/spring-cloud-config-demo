@@ -24,6 +24,8 @@ jobs:
       - run: docker login -u $DOCKER_MB_USER -p $DOCKER_MB_PASS
       - run: mvn install
 
+      - store_test_results:
+          path: test-results
 
 
 workflows:
