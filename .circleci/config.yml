@@ -26,10 +26,18 @@ jobs:
       - run: mvn install
 
       - store_artifacts:
-          path: spring-cloud-config-client/target/*.jar
+          path: spring-cloud-config-client/target
+          destination: client
+
+      - store_artifacts:
+          path: spring-cloud-config-server/target
+          destination: server
 
       - store_test_results:
           path: spring-cloud-config-client/target/surefire-reports
+
+      - store_test_results:
+          path: spring-cloud-config-server/target/surefire-reports
 
 
 workflows:
