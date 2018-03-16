@@ -10,7 +10,7 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "pom.xml" }}
           - v1-dependencies-
-      - run: versions:set versions:commit -DnewVersion=1.$CIRCLE_BUILD_NUM.0
+      - run: mvn versions:set versions:commit -DnewVersion=1.$CIRCLE_BUILD_NUM.0
 
       - save_cache:
           paths:
