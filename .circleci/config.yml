@@ -1,68 +1,34 @@
 version: 2
 jobs:
 
-  set-version:
+  build-test-deploy:
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          - v1-dependencies-
-      - run: mvn versions:set versions:commit -DnewVersion=1.$CIRCLE_BUILD_NUM.0
 
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - setup_remote_docker:
+          docker_layer_caching: true
 
-  build-and-test:
-    requires:
-      - set-version
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - checkout
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          - v1-dependencies-
+                keys:
+                - v1-dependencies-{{ checksum "pom.xml" }}
+                - v1-dependencies-
       - run: mvn dependency:go-offline
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run: mvn integration-test -DskipDocker
 
-  deploy:
-    requires:
-      - build-and-test
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - restore_cache:
-                keys:
-                - v1-dependencies-{{ checksum "pom.xml" }}
-                - v1-dependencies-
+      - run: mvn versions:set versions:commit -DnewVersion=1.$CIRCLE_BUILD_NUM.0
+#      - run: docker login -u $DOCKER_MB_USER -p $DOCKER_MB_PASS
+      - run: mvn install
 
-      - run: docker login -u $DOCKER_MB_USER -p $DOCKER_MB_PASS
-      - run: mvn install -DskipTests -DskipITs
 
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
 
 workflows:
   version: 2
-  build_and_test:
+  build_test_and_deploy:
     jobs:
-      - set-version:
-          context: mblackford-docker
-      - build-and-test
-      - deploy:
+      - build-test-deploy:
           context: mblackford-docker
