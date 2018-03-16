@@ -21,7 +21,7 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       - run: mvn versions:set versions:commit -DnewVersion=1.$CIRCLE_BUILD_NUM.0
-#      - run: docker login -u $DOCKER_MB_USER -p $DOCKER_MB_PASS
+      - run: docker login -u $DOCKER_MB_USER -p $DOCKER_MB_PASS
       - run: mvn install
 
 
