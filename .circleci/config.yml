@@ -14,27 +14,31 @@ jobs:
 
     steps:
       - checkout
-
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "pom.xml" }}
           - v1-dependencies-
-
       - run: mvn dependency:go-offline
-
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-
-
       - run: mvn integration-test
 
+  test:
+    requires:
+      - build
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    steps:
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
 
 workflows:
   version: 2
-  build_it:
+  build_and_test:
     jobs:
       - build
+      - test
           context: mblackford-docker
