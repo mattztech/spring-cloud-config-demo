@@ -68,7 +68,6 @@
                         <version>1.4.0</version>
                         <configuration>
                             <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                            <skip>${skipDocker}</skip>
                             <buildArgs>
                                 <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                             </buildArgs>
@@ -81,6 +80,9 @@
                                 <goals>
                                     <goal>build</goal>
                                 </goals>
+                                <configuration>
+                                    <skip>${skipDocker}</skip>
+                                </configuration>
                             </execution>
                             <!-- Deploy latest tagged image (Overwriting the previous one) -->
                             <execution>
@@ -92,6 +94,7 @@
                                 </goals>
                                 <configuration>
                                     <skip>${skipDockerLatest}</skip>
+                                    <skip>${skipDocker}</skip>
                                     <tag>latest</tag>
                                 </configuration>
                             </execution>
@@ -105,6 +108,7 @@
                                 </goals>
                                 <configuration>
                                     <tag>${project.version}</tag>
+                                    <skip>${skipDocker}</skip>
                                 </configuration>
                             </execution>
                         </executions>
