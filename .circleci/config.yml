@@ -1,17 +1,8 @@
-# Java Maven CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
-
-    working_directory: ~/repo
-    environment:
-      MAVEN_OPTS: -Xmx3200m
-
     steps:
       - checkout
       - restore_cache:
@@ -24,21 +15,15 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn integration-test
-
   test:
-    requires:
-      - build
     docker:
       - image: circleci/openjdk:8-jdk
-
     steps:
+      - checkout
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
-
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
       - test
-          context: mblackford-docker
