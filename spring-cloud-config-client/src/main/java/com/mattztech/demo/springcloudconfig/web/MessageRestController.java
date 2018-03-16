@@ -1,4 +1,4 @@
-package springcloudconfig.web;
+package com.mattztech.demo.springcloudconfig.web;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

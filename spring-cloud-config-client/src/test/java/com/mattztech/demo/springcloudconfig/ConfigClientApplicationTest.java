@@ -1,4 +1,4 @@
-package springcloudconfig;
+package com.mattztech.demo.springcloudconfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
