@@ -4,6 +4,7 @@ jobs:
   build-test-deploy:
     docker:
       - image: circleci/openjdk:8-jdk
+    working_directory: ~/spring-cloud-config
     steps:
       - checkout
 
@@ -24,8 +25,11 @@ jobs:
       - run: docker login -u $DOCKER_MB_USER -p $DOCKER_MB_PASS
       - run: mvn install
 
+      - store_artifacts:
+          path: spring-cloud-config-client/target/*.jar
+
       - store_test_results:
-          path: test-results
+          path: spring-cloud-config-client/target/surefire-reports
 
 
 workflows:
