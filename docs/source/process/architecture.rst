@@ -47,7 +47,9 @@ spring:
       fail-fast: true
 
 The retry properties are self-explanatory and the fail-fast property forces the server to fail if all retries have
-been used up and the config has still not been found. This is optional but normally desired
+been used up and the config has still not been found. This is optional but normally desired.
+
+Note that the fail fast property must be absent in the src/test/bootstrap.yml, otherwise the tests will fail.
 
 In addition to these properties, the following additional dependencies are required for retry functionality:
 
