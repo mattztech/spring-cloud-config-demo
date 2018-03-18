@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MessageRestController {
 
-  @Value("${message:Hello default")
-  private String message;
+  @Value("${user.password:notthere}")
+  private String password;
 
   @GetMapping("/message")
   public String getMessage() {
-    return this.message;
+    return "The encrypted password is: " + this.password;
   }
 }

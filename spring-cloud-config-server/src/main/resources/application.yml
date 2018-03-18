@@ -5,5 +5,5 @@ spring:
     config:
       server:
         git:
-          uri: ${HOME}/spring-test/config
-
+#          uri: git@github.com:mattztech/super-secret-passwords.git
+          uri: ${HOME}/dev/git/super-secret-passwords

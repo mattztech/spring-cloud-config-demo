@@ -35,7 +35,9 @@ initialised as a Git repository with:
 
     git init
 
-If a URL, then note that additional authentication config may be required
+For testing purposes a hard-coded file path is an easiest way to get up and running. The following sets up a
+the server to look under ~/spring-test/config for all properties. Under that directory, place .properties or
+.yml files corresponding to the spring.application.name of the client
 
 .. code-block:: yaml
 
@@ -45,3 +47,16 @@ If a URL, then note that additional authentication config may be required
           server:
             git:
               uri: ${HOME}/spring-test/config
+
+A URL can also be set, using either HTTPS or SSH access to your preferred git provider. Note that HTTPS connections
+may require additional user detail config, and SSH access will only work if your machine has SSH access to the remote
+server.
+
+.. code-block:: yaml
+
+    spring:
+      cloud:
+        config:
+          server:
+            git:
+              uri: git@github.com:mattztech/super-secret-passwords.git
