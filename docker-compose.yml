@@ -2,12 +2,12 @@ version: '3.4'
 services:
   server:
     image: mblackford/spring-cloud-config-server:latest
-    environment:
-      - spring.profiles.active=docker
     ports:
      - "8888:8888"
   client:
     image: mblackford/spring-cloud-config-client:latest
+    environment:
+      - spring.profiles.active=docker
     depends_on:
       - server
     ports:
