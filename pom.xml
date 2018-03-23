@@ -87,7 +87,7 @@
                             <!-- Deploy latest tagged image (Overwriting the previous one) -->
                             <execution>
                                 <id>deploy-latest</id>
-                                <phase>install</phase>
+                                <phase>deploy</phase>
                                 <goals>
                                     <goal>tag</goal>
                                     <goal>push</goal>
@@ -101,7 +101,7 @@
                             <!--Deploy the version tag-->
                             <execution>
                                 <id>deploy-version</id>
-                                <phase>install</phase>
+                                <phase>deploy</phase>
                                 <goals>
                                     <goal>tag</goal>
                                     <goal>push</goal>
