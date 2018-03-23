@@ -37,14 +37,14 @@ this is built in to Spring Cloud Config with the addition of the following prope
 
 .. code-block:: yaml
 
-spring:
-  cloud:
-    config:
-      retry:
-        max-attempts: 10
-        initial-interval: 1000
-        max-interval: 10000
-      fail-fast: true
+    spring:
+      cloud:
+        config:
+          retry:
+            max-attempts: 10
+            initial-interval: 1000
+            max-interval: 10000
+          fail-fast: true
 
 The retry properties are self-explanatory and the fail-fast property forces the server to fail if all retries have
 been used up and the config has still not been found. This is optional but normally desired.
