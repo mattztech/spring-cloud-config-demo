@@ -6,4 +6,5 @@ spring:
       server:
         git:
           uri: https://github.com/mattztech/super-secret-passwords.git
+#          uri: git@github.com:mattztech/super-secret-passwords.git
 #          uri: ${HOME}/dev/git/super-secret-passwords

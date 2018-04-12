@@ -14,6 +14,12 @@ While symmetric keys are easier to set up, asymmetric keys are far more secure, 
 environment. The following assumes asymmetric encryption. For more details see the
 `Spring Cloud Config docs <http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.4.2.RELEASE/single/spring-cloud-config.html>`_
 
+.. important:: Prerequisites: to use the encryption and decryption features you need the full-strength JCE installed in your
+          JVM (it’s not there by default). You can download the "Java Cryptography Extension (JCE) Unlimited Strength
+          Jurisdiction Policy Files" from Oracle, and follow instructions for installation (essentially replace the 2
+          policy files in the JRE lib/security directory with the ones that you downloaded).
+
+
 Enabling and using encryption
 =============================
 
