@@ -12,7 +12,7 @@ public class MessageRestController {
   @Value("${user.password:notfound}")
   private String password;
 
-  @Value("${message}")
+  @Value("${message:notfound}")
   private String message;
 
   @GetMapping("/message")
