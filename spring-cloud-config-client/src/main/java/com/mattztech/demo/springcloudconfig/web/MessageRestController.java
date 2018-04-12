@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MessageRestController {
 
-  @Value("${user.password}")
+  @Value("${user.password:notfound}")
   private String password;
 
   @Value("${message}")
